@@ -5,16 +5,22 @@ import {
   ImageBackground,
   StatusBar,
 } from "react-native";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import ViewScreen from "./screens/ViewScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import AccountScreen from "./screens/AccountScreen";
 import AppButton from "./components/AppButton";
 import Card from "./components/Card";
 import ListingDetailsScreen from "./screens/ListingDetailsScreen";
+import MessagesScreen from "./screens/MessagesScreen";
+import Screen from "./screens/Screen";
+import Icon from "./components/Icon";
+import colors from "./colors";
+import ListItem from "./components/ListItem";
+import ListingScreen from "./screens/ListingScreen";
+
 export default function App() {
-  return (
-    // <WelcomeScreen />
-    <ViewScreen />
-  );
+  return <ListingScreen />;
 }
 
 const styles = StyleSheet.create({

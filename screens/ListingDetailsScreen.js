@@ -16,7 +16,7 @@ const ListingDetailsScreen = () => {
 
       <View style={styles.userContainer}>
         <ListItem
-          image={require("../assets/images/red-jacket.jpg")}
+          image={require("../assets/images/mosh.jpg")}
           title="Ariful Islam"
           subtitle="5 Products"
         />
