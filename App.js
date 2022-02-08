@@ -4,6 +4,7 @@ import {
   View,
   ImageBackground,
   StatusBar,
+  Switch,
 } from "react-native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import ViewScreen from "./screens/ViewScreen";
@@ -20,13 +21,26 @@ import ListItem from "./components/ListItem";
 import ListingScreen from "./screens/ListingScreen";
 import AppTextInput from "./components/AppTextInput";
 import AppPicker from "./components/AppPicker";
+import { useState } from "react";
 
 export default function App() {
+  const categories = [
+    { title: "Furniture", value: 1 },
+    { title: "Clothing", value: 2 },
+    { title: "Cameras", value: 3 },
+  ];
+  const [category, setCategory] = useState(categories[0]);
   return (
-    <View>
-      <AppPicker icon="apps" placeholder="Category" />
-      <AppTextInput placeholder="Username" icon="email" />;
-    </View>
+    <Screen>
+      <AppPicker
+        selectedItem={category}
+        onSelectedItem={(selecteditem) => setCategory(selecteditem)}
+        items={categories}
+        icon="apps"
+        placeholder="Category"
+      />
+      <AppTextInput placeholder="Username" icon="email" />
+    </Screen>
   );
 }
 

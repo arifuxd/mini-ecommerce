@@ -1,21 +1,73 @@
-import { Platform, StyleSheet, Text, TextInput, View } from "react-native";
-import React from "react";
+import {
+  Button,
+  FlatList,
+  Modal,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import React, { useState } from "react";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import colors from "../colors";
 import defaultStyles from "../defaultStyles";
-const AppPicker = ({ icon, placeholder, ...restProps }) => {
+import PickerItem from "./PickerItem";
+import Screen from "../screens/Screen";
+const AppPicker = ({
+  icon,
+  placeholder,
+  items,
+  selectedItem,
+  onSelectedItem,
+}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <View style={styles.container}>
-      {icon && (
-        <MaterialCommunityIcons
-          name={icon}
-          size={20}
-          color={defaultStyles.colors.medium}
-          style={styles.icon}
-        />
-      )}
-      <Text>{placeholder}</Text>
-    </View>
+    <>
+      <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
+        <View style={styles.container}>
+          <View style={{ flexDirection: "row" }}>
+            {icon && (
+              <MaterialCommunityIcons
+                name={icon}
+                size={20}
+                color={defaultStyles.colors.medium}
+                style={styles.icon}
+              />
+            )}
+            <Text>{selectedItem ? selectedItem.title : placeholder}</Text>
+          </View>
+          <MaterialCommunityIcons
+            name="chevron-down"
+            size={20}
+            color={defaultStyles.colors.medium}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+      <Modal visible={modalVisible} animationType="slide">
+        <Screen>
+          <Button title="close" onPress={() => setModalVisible(false)} />
+          <FlatList
+            data={items}
+            keyExtractor={(key) => key.value.toString()}
+            renderItem={({ item }) => {
+              // console.log(item);
+              return (
+                <PickerItem
+                  label={item.title}
+                  onPress={() => {
+                    setModalVisible(false);
+                    onSelectedItem(item);
+                  }}
+                />
+              );
+            }}
+          />
+        </Screen>
+      </Modal>
+    </>
   );
 };
 
@@ -28,6 +80,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     alignItems: "center",
+    justifyContent: "space-between",
   },
   icon: {
     marginRight: 10,
