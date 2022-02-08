@@ -19,9 +19,15 @@ import colors from "./colors";
 import ListItem from "./components/ListItem";
 import ListingScreen from "./screens/ListingScreen";
 import AppTextInput from "./components/AppTextInput";
+import AppPicker from "./components/AppPicker";
 
 export default function App() {
-  return <AppTextInput placeholder="Username" icon="email" />;
+  return (
+    <View>
+      <AppPicker icon="apps" placeholder="Category" />
+      <AppTextInput placeholder="Username" icon="email" />;
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
