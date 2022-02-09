@@ -9,7 +9,6 @@ import React from "react";
 const AppButton = ({ title, color = "tomato", onPress }) => {
   return (
     <TouchableOpacity
-      activeOpacity={0.9}
       onPress={onPress}
       style={[styles.button, { backgroundColor: color }]}
     >
