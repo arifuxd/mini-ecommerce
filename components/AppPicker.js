@@ -15,19 +15,23 @@ import colors from "../colors";
 import defaultStyles from "../defaultStyles";
 import PickerItem from "./PickerItem";
 import Screen from "../screens/Screen";
+import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 const AppPicker = ({
+  PickerItemComponent = PickerItem,
   icon,
   placeholder,
   items,
   selectedItem,
   onSelectedItem,
+  width = "100%",
+  numberOfColumns = 1,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width: width }]}>
           <View style={{ flexDirection: "row" }}>
             {icon && (
               <MaterialCommunityIcons
@@ -37,7 +41,13 @@ const AppPicker = ({
                 style={styles.icon}
               />
             )}
-            <Text>{selectedItem ? selectedItem.title : placeholder}</Text>
+            {selectedItem ? (
+              <Text style={defaultStyles.text}>{selectedItem.label}</Text>
+            ) : (
+              <Text style={[defaultStyles.text, styles.placeholder]}>
+                {placeholder}
+              </Text>
+            )}
           </View>
           <MaterialCommunityIcons
             name="chevron-down"
@@ -52,11 +62,13 @@ const AppPicker = ({
           <FlatList
             data={items}
             keyExtractor={(key) => key.value.toString()}
+            numColumns={numberOfColumns}
             renderItem={({ item }) => {
-              // console.log(item);
+              console.log(item);
               return (
-                <PickerItem
-                  label={item.title}
+                <PickerItemComponent
+                  item={item}
+                  label={item.label}
                   onPress={() => {
                     setModalVisible(false);
                     onSelectedItem(item);
@@ -78,12 +90,14 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 10,
     flexDirection: "row",
-    width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
   },
   icon: {
     marginRight: 10,
+  },
+  placeholder: {
+    color: colors.medium,
   },
 });
 export default AppPicker;
