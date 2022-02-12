@@ -5,28 +5,34 @@ import {
   ImageBackground,
   StatusBar,
   Switch,
+  Button,
+  Image,
 } from "react-native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import ViewScreen from "./screens/ViewScreen";
-import WelcomeScreen from "./screens/WelcomeScreen";
-import AccountScreen from "./screens/AccountScreen";
-import AppButton from "./components/AppButton";
-import Card from "./components/Card";
-import ListingDetailsScreen from "./screens/ListingDetailsScreen";
-import MessagesScreen from "./screens/MessagesScreen";
+
 import Screen from "./screens/Screen";
-import Icon from "./components/Icon";
-import colors from "./colors";
-import ListItem from "./components/ListItem";
-import ListingScreen from "./screens/ListingScreen";
-import AppTextInput from "./components/AppTextInput";
-import AppPicker from "./components/AppPicker";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import LoginScreen from "./screens/LoginScreen";
 import ListingEditScreen from "./components/ListingEditScreen";
+import ImageInput from "./components/ImageInput";
+import ImageInputList from "./components/ImageinputList";
+import * as ImagePicker from "expo-image-picker";
 
 export default function App() {
-  return <ListingEditScreen />;
+  const [imageuris, setImageUris] = useState([]);
+  const handleAdd = (uri) => setImageUris([...imageuris, uri]);
+  const handleRemove = (uri) =>
+    setImageUris(imageuris.filter((imageuri) => imageuri !== uri));
+  return (
+    <Screen>
+      <ImageInputList
+        imageuris={imageuris}
+        onAddImage={handleAdd}
+        onRemoveImage={handleRemove}
+      />
+    </Screen>
+  );
 }
 
 const styles = StyleSheet.create({
