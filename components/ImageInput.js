@@ -19,11 +19,8 @@ const ImageInput = ({ imageUri, onChangeImage }) => {
     }
   };
 
-  useEffect(() => {
-    requestPermission();
-  }, []);
-
   const handlePress = () => {
+    requestPermission();
     if (!imageUri) {
       openImage();
     } else {
