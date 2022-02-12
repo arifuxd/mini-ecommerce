@@ -14,7 +14,10 @@ const AppTextInput = ({ icon, ...restProps }) => {
           style={styles.icon}
         />
       )}
-      <TextInput style={defaultStyles.text} {...restProps} />
+      <TextInput
+        style={[defaultStyles.text, { width: "100%" }]}
+        {...restProps}
+      />
     </View>
   );
 };
