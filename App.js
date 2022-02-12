@@ -23,9 +23,10 @@ import AppTextInput from "./components/AppTextInput";
 import AppPicker from "./components/AppPicker";
 import { useState } from "react";
 import LoginScreen from "./screens/LoginScreen";
+import ListingEditScreen from "./components/ListingEditScreen";
 
 export default function App() {
-  return <LoginScreen />;
+  return <ListingEditScreen />;
 }
 
 const styles = StyleSheet.create({

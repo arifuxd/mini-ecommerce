@@ -6,8 +6,12 @@ const Card = ({ title, subTitle, image }) => {
     <View style={styles.card}>
       <Image style={styles.image} resizeMode="repeat" source={image} />
       <View style={styles.details}>
-        <Text style={styles.titleStyle}>{title}</Text>
-        <Text style={styles.subtitleStyle}>{subTitle}</Text>
+        <Text numberOfLines={1} style={styles.titleStyle}>
+          {title}
+        </Text>
+        <Text numberOfLines={1} style={styles.subtitleStyle}>
+          {subTitle}
+        </Text>
       </View>
     </View>
   );
